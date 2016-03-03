@@ -8,6 +8,7 @@ var pitch = document.querySelector('#pitch');
 var pitchValue = document.querySelector('.pitch-value');
 var rate = document.querySelector('#rate');
 var rateValue = document.querySelector('.rate-value');
+var speakButton = document.querySelector('.speak-button');
 
 var voices = [];
 
@@ -42,6 +43,9 @@ inputForm.onsubmit = function(event) {
     if(voices[i].name === selectedOption) {
       utterThis.voice = voices[i];
     }
+  }
+  if(voices.length < 1) {
+    utterThis.lang = 'en-US';
   }
   utterThis.pitch = pitch.value;
   utterThis.rate = rate.value;
