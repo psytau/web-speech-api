@@ -3,6 +3,7 @@ var synth = window.speechSynthesis;
 var inputForm = document.querySelector('form');
 var inputTxt = document.querySelector('.txt');
 var voiceSelect = document.querySelector('select');
+var langSelect = document.querySelector('.lang-select');
 
 var pitch = document.querySelector('#pitch');
 var pitchValue = document.querySelector('.pitch-value');
@@ -11,6 +12,7 @@ var rateValue = document.querySelector('.rate-value');
 var speakButton = document.querySelector('.speak-button');
 
 var voices = [];
+var languages = ['en-US', 'zh-TW', 'ko-KR'];
 
 function populateVoiceList() {
   voices = synth.getVoices();
@@ -29,9 +31,24 @@ function populateVoiceList() {
   }
 }
 
+function populateLangList() {
+
+  for(i = 0; i < languages.length ; i++) {
+    var option = document.createElement('option');
+    option.textContent = languages[i];
+
+    option.setAttribute('data-lang', languages[i]);
+    langSelect.appendChild(option);
+  }
+}
+
 populateVoiceList();
 if (speechSynthesis.onvoiceschanged !== undefined) {
   speechSynthesis.onvoiceschanged = populateVoiceList;
+}
+
+if(voices.length < 1) {
+  populateLangList();
 }
 
 inputForm.onsubmit = function(event) {
@@ -50,7 +67,8 @@ inputForm.onsubmit = function(event) {
     }
   }
   else {
-    utterThis.lang = 'en-US';
+    selectedOption = langSelect.selectedOptions[0].getAttribute('data-lang');
+    utterThis.lang = selectedOption;
   }
   utterThis.pitch = pitch.value;
   utterThis.rate = rate.value;
