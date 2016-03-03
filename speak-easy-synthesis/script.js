@@ -42,21 +42,21 @@ function populateLangList() {
   }
 }
 
-populateVoiceList();
-if (speechSynthesis.onvoiceschanged !== undefined) {
-  speechSynthesis.onvoiceschanged = function (){
-    populateVoiceList();
-    setTimeout(function(){    
-      if(voices.length > 0){
-        langSelect.parentNode.removeChild(langSelect);
-      }
-    }, 100);
-  };
-}
+// populateVoiceList();
+// if (speechSynthesis.onvoiceschanged !== undefined) {
+//   speechSynthesis.onvoiceschanged = function (){
+//     populateVoiceList();
+//     setTimeout(function(){    
+//       if(voices.length > 0){
+//         langSelect.parentNode.removeChild(langSelect);
+//        }
+//     }, 100);
+//   };
+// }
 
-if(voices.length < 1) {
+// if(voices.length < 1) {
   populateLangList();
-}
+// }
 
 inputForm.onsubmit = function(event) {
   event.preventDefault();
