@@ -46,9 +46,11 @@ populateVoiceList();
 if (speechSynthesis.onvoiceschanged !== undefined) {
   speechSynthesis.onvoiceschanged = function (){
     populateVoiceList();
-    if(voices.length > 0){
-      langSelect.parentNode.removeChild(langSelect);
-    }
+    setTimeout(function(){    
+      if(voices.length > 0){
+        langSelect.parentNode.removeChild(langSelect);
+      }
+    }, 100);
   };
 }
 
