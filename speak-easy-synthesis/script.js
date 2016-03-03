@@ -44,10 +44,12 @@ function populateLangList() {
 
 populateVoiceList();
 if (speechSynthesis.onvoiceschanged !== undefined) {
-  speechSynthesis.onvoiceschanged = populateVoiceList;
-  if(voices.length > 0){
-    langSelect.parentNode.removeChild(langSelect);
-  }
+  speechSynthesis.onvoiceschanged = function (){
+    populateVoiceList();
+    if(voices.length > 0){
+      langSelect.parentNode.removeChild(langSelect);
+    }
+  };
 }
 
 if(voices.length < 1) {
